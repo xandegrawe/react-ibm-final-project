@@ -307,34 +307,21 @@ function ProductList({ onHomeClick }) {
         </div>
       </div>
       {!showCart ? (
-        <div className="product-grid">
-          {plantsArray.map((category, index) => (
-            <div key={index}>
-              <h1>
-                <div>{category.category}</div>
-              </h1>
+        <div>
+          {plantsArray.map((section, sectionIndex) => (
+            <div className="product-grid" key={sectionIndex}>
+              <h2 className="plant_heading">{section.category}</h2>
               <div className="product-list">
-                {category.plants.map((plant, plantIndex) => (
+                {section.plants.map((plant, plantIndex) => (
                   <div className="product-card" key={plantIndex}>
-                    <img
-                      className="product-image"
-                      src={plant.image}
-                      alt={plant.name}
-                    />
-                    <div className="product-title">{plant.name}</div>
-                    <div className="product-description">{plant.description}</div>
-                    <div className="product-cost">${plant.cost}</div>
+                    <h3 className="product-title">{plant.name}</h3>
+                    <img className="product-image" src={plant.image} alt={plant.name} />
+                    <p className="product-price">{plant.cost}</p>
+                    <p>{plant.description}</p>
                     {cartItems.some(item => item.name === plant.name) ? (
-                      <button className="product-button" disabled style={{ backgroundColor: 'gray', cursor: 'not-allowed' }}>
-                        Added to Cart
-                      </button>
+                      <button className="product-button added-to-cart">Added to Cart</button>
                     ) : (
-                      <button
-                        className="product-button"
-                        onClick={() => handleAddToCart(plant)}
-                      >
-                        Add to Cart
-                      </button>
+                      <button className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                     )}
                   </div>
                 ))}
